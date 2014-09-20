@@ -1,7 +1,7 @@
 {
   "name": "webRTC-meeting",
   "version": "0.0.0",
-  "description": "",
+  "description": "chat-webRTC-meeting ==============",
   "main": "config.js",
   "dependencies": {
     "body-parser": "~1.8.2",
@@ -14,5 +14,13 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexzhxin/sockrage-webRTC-meeting.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexzhxin/sockrage-webRTC-meeting/issues"
+  },
+  "homepage": "https://github.com/alexzhxin/sockrage-webRTC-meeting"
 }

@@ -1,20 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Meeting</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/main.css" rel="stylesheet">
-
+    <% include partial/_htmlHead.ejs %>
 </head>
 
 <body>
@@ -25,16 +12,7 @@
 
         <div class="cover-container">
 
-            <div class="masthead clearfix">
-                <div class="inner">
-                    <h3 class="masthead-brand"></h3>
-                    <ul class="nav masthead-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Log in</a></li>
-                    </ul>
-                </div>
-            </div>
+            <% include partial/_header.ejs %>
 
             <div class="inner cover">
                 <h1 class="cover-heading">Meeting.</h1>
@@ -44,11 +22,7 @@
                 </p>
             </div>
 
-            <div class="mastfoot">
-                <div class="inner">
-                    <p>Special gift for <a href="http://ultrasupernew.com">UltraSuperNew</a>, by <a href="https://alexandrenguyen.fr">Alexandre Nguyen</a>.</p>
-                </div>
-            </div>
+            <% include partial/_footer.ejs %>
 
         </div>
 
@@ -56,8 +30,7 @@
 
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<% include partial/_beforeBodyEnd.ejs %>
 
 </body>
 </html>

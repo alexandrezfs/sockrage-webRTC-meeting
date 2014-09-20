@@ -23,9 +23,28 @@ app.route('/').get(function(req, res) {
 
     res.render('index', {
         sockrage_addr : config.configObject.sockrage_addr,
-        db: config.configObject.db
+        db: config.configObject.db,
+        page : 'index'
     });
 
+});
+
+/**
+ * Rendering Sign Up page
+ */
+app.route('/signup').get(function(req, res) {
+    res.render('signup', {
+        page : 'signup'
+    });
+});
+
+/**
+ * Login page
+ */
+app.route('/login').get(function(req, res) {
+    res.render('login', {
+        page : 'login'
+    });
 });
 
 /**

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partial/_htmlHead.ejs %>
+</head>
+
+<body>
+
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <% include partial/_header.ejs %>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Sign Up</h1>
+                <p class="lead">It takes 20 seconds to join simplicity.</p>
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputFirstname" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <button type="submit" class="btn btn-default">I'm done, proceed.</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <% include partial/_footer.ejs %>
+
+        </div>
+
+    </div>
+
+</div>
+
+<% include partial/_beforeBodyEnd.ejs %>
+
+</body>
+</html>
