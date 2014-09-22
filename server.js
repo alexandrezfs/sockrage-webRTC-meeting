@@ -58,6 +58,19 @@ app.route('/login').get(function(req, res) {
 });
 
 /**
+ * Dashboard
+ */
+app.route('/dashboard').get(function(req, res) {
+    res.render('dashboard', {
+        page : 'dashboard',
+        sockrage : {
+            addr : config.configObject.sockrage_addr,
+            db : config.configObject.db.user
+        }
+    });
+});
+
+/**
  * Upload route
  */
 app.route('/upload').post(function(req, res) {
