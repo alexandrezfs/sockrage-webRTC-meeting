@@ -1,7 +1,7 @@
 chat-webRTC-meeting
 ==============
 
-[Node JS] A browser enabled chat using Sockrage and WebRTC.
+[NodeJS] A browser enabled chat using Sockrage and WebRTC.
 
 ## Installation
 
