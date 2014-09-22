@@ -1,36 +1,39 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <% include partial/_htmlHead.ejs %>
-</head>
 
-<body>
+    <head>
+        <% include partial/_htmlHead.ejs %>
+    </head>
 
-<div class="site-wrapper">
+    <body>
 
-    <div class="site-wrapper-inner">
+    <div class="site-wrapper">
 
-        <div class="cover-container">
+        <div class="site-wrapper-inner">
 
-            <% include partial/_header.ejs %>
+            <div class="cover-container">
 
-            <div class="inner cover">
-                <h1 class="cover-heading">Meeting.</h1>
-                <p class="lead">You wanted Skype working on your browser... It's here.</p>
-                <p class="lead">
-                    <a href="#" class="btn btn-lg btn-default">Sign up now</a>
-                </p>
+                <% include partial/_header.ejs %>
+
+                <div class="inner cover">
+                    <h1 class="cover-heading">Meeting.</h1>
+                    <p class="lead">You wanted Skype working on your browser... It's here.</p>
+                    <p class="lead">
+                        <a href="/signup" class="btn btn-lg btn-default">Sign up now</a>
+                    </p>
+                </div>
+
+                <% include partial/_footer.ejs %>
+
             </div>
-
-            <% include partial/_footer.ejs %>
 
         </div>
 
     </div>
 
-</div>
+    <% include partial/_beforeBodyEnd.ejs %>
 
-<% include partial/_beforeBodyEnd.ejs %>
+    </body>
 
-</body>
 </html>
