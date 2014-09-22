@@ -1,0 +1,23 @@
+{
+  "name": "sockrage",
+  "homepage": "https://github.com/alexzhxin/sockrage-js-client",
+  "authors": [
+    "NGUYEN Alexandre <alex.nr@hotmail.fr>"
+  ],
+  "description": "Javascript library to use with a Sockrage instance.",
+  "main": "sockrage.min.js",
+  "keywords": [
+    "websocket"
+  ],
+  "license": "MIT",
+  "_release": "2ac9479464",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "2ac947946473d78ec3a30b9009dc4a18cc16014d"
+  },
+  "_source": "git://github.com/alexzhxin/sockrage-js-client.git",
+  "_target": "*",
+  "_originalSource": "sockrage",
+  "_direct": true
+}

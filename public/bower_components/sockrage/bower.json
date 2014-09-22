@@ -1,0 +1,14 @@
+{
+  "name": "sockrage",
+  "version": "1.0",
+  "homepage": "https://github.com/alexzhxin/sockrage-js-client",
+  "authors": [
+    "NGUYEN Alexandre <alex.nr@hotmail.fr>"
+  ],
+  "description": "Javascript library to use with a Sockrage instance.",
+  "main": "sockrage.min.js",
+  "keywords": [
+    "websocket"
+  ],
+  "license": "MIT"
+}

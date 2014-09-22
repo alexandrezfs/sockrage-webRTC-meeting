@@ -49,7 +49,11 @@ app.route('/signup').get(function(req, res) {
  */
 app.route('/login').get(function(req, res) {
     res.render('login', {
-        page : 'login'
+        page : 'login',
+        sockrage : {
+            addr : config.configObject.sockrage_addr,
+            db : config.configObject.db.user
+        }
     });
 });
 

@@ -3,9 +3,57 @@ $(document).ready(function() {
 
 });
 
+/**
+ * The login form class
+ * @constructor
+ */
+function LoginForm() {
+
+    this.SockrageUser;
+
+    this.init = function(sockrageAddr, reference) {
+
+        this.SockrageUser = new SockRage(sockrageAddr, reference);
+        this.SockrageUser.on("getAll", function(data) {
+
+            var password = $("#inputPassword").val();
+            var email = $("#inputEmail").val();
+
+            var query = jsonsql.query(
+                "SELECT password,email FROM json WHERE (password == '" + password + "' && email == '" + email + "')",
+                data);
+
+            if(query.length == 1) {
+                //connection OK
+                document.location = "/dashboard";
+            }
+            else {
+                toastr.error("Authentication failed.");
+            }
+
+        });
+
+        $("#submitLoginButton").click(function() {
+
+            LoginForm.login();
+
+        });
+
+    }
+
+    this.login = function() {
+
+        this.SockrageUser.list();
+
+    }
+}
+
+/**
+ * The signup Form class
+ * @constructor
+ */
 function SignupForm() {
 
-    this.user = {};
     this.dropzoneId = "profilePicDropper";
     this.uploadPath = "/uploads";
     this.SockrageUser;
@@ -99,15 +147,13 @@ function SignupForm() {
         }
         else {
             SignupForm.SockrageUser.set({
-                firstname : $("#inputFirstname").val(),
-                lastname : $("#inputLastname").val(),
-                email : $("#InputEmail").val(),
+                username : $("#inputUsername").val(),
+                email : $("#inputEmail").val(),
                 password : $("#inputPassword").val(),
                 profilePicture : $("#inputProfilePicture").val()
             });
         }
     }
-
 }
 
 /**
