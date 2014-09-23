@@ -1,7 +1,51 @@
-$(document).ready(function() {
+/**
+ * The create room form
+ * @constructor
+ */
+function CreateRoomForm() {
 
+    this.SockrageRoom;
+    this.user;
 
-});
+    this.init = function(sockrageAddr, reference) {
+
+        this.user = JSON.parse(localStorage.getItem("user"));
+
+        this.SockrageRoom = new SockRage(sockrageAddr, reference);
+
+        $("#submitCreateRoom").click(function() {
+
+           CreateRoomForm.createRoom();
+
+        });
+
+    }
+
+    this.createRoom = function() {
+
+        if($("#inputName").val().length == 0) {
+
+            toastr.error("Please enter a room name");
+        }
+        else if($("#inputDescription").val().length == 0) {
+
+            toastr.error("Please enter a room description");
+        }
+        else {
+
+            CreateRoomForm.SockrageRoom.set({
+                name : $("#inputName").val(),
+                description : $("#inputDescription").val(),
+                author : CreateRoomForm.user.username
+            });
+
+            document.location = "/dashboard";
+
+        }
+
+    }
+
+}
 
 /**
  * The login form class
@@ -19,12 +63,15 @@ function LoginForm() {
             var password = $("#inputPassword").val();
             var email = $("#inputEmail").val();
 
-            var query = jsonsql.query(
-                "SELECT password,email FROM json WHERE (password == '" + password + "' && email == '" + email + "')",
+            var user = jsonsql.query(
+                "SELECT * FROM json WHERE (password == '" + password + "' && email == '" + email + "')",
                 data);
 
-            if(query.length == 1) {
+            if(user.length == 1) {
                 //connection OK
+
+                localStorage.setItem("user", JSON.stringify(user)); //store in session
+
                 document.location = "/dashboard";
             }
             else {

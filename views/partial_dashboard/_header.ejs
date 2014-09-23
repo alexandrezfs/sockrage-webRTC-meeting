@@ -31,13 +31,16 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li class="active">
+            <li <% if(page == "dashboard"){ %>class="active"<% } %>>
                 <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
-            <li>
+            <li <% if(page == "newRoom"){ %>class="active"<% } %>>
+                <a href="/newRoom"><i class="fa fa-fw fa-rocket"></i> New Room</a>
+            </li>
+            <li <% if(page == "myRooms"){ %>class="active"<% } %>>
                 <a href="/myRooms"><i class="fa fa-fw fa-comment"></i> My Rooms</a>
             </li>
-            <li>
+            <li <% if(page == "settings"){ %>class="active"<% } %>>
                 <a href="/settings"><i class="fa fa-fw fa-tasks"></i> Settings</a>
             </li>
         </ul>

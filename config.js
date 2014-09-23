@@ -5,7 +5,8 @@ exports.configObject = {
     sockrage_addr : "http://localhost:3000",
     db : {
         message : "sockrage_meeting_message",
-        user : "sockrage_meeting_user"
+        user : "sockrage_meeting_user",
+        room : "sockrage_meeting_room"
     },
     server_port : 3003
 };

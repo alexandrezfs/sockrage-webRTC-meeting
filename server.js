@@ -65,7 +65,20 @@ app.route('/dashboard').get(function(req, res) {
         page : 'dashboard',
         sockrage : {
             addr : config.configObject.sockrage_addr,
-            db : config.configObject.db.user
+            db : config.configObject.db
+        }
+    });
+});
+
+/**
+ * Dashboard
+ */
+app.route('/newRoom').get(function(req, res) {
+    res.render('newRoom', {
+        page : 'newRoom',
+        sockrage : {
+            addr : config.configObject.sockrage_addr,
+            db : config.configObject.db
         }
     });
 });

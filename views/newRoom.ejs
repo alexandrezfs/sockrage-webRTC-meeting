@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partial_dashboard/_htmlHead.ejs %>
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <% include partial_dashboard/_header.ejs %>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        New Room <small>Rooms overview</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-rocket"></i> Create a new meeting room.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div role="form">
+                        <div class="form-group">
+                            <label for="inputName">Meeting room's name</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Meeting rooms's description</label>
+                            <input type="text" class="form-control" id="inputDescription" placeholder="Description">
+                        </div>
+                        <button type="submit" id="submitCreateRoom" class="btn btn-primary">Create room</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+
+</div>
+
+<% include partial_dashboard/_beforeBodyEnd.ejs %>
+
+<script>
+    var CreateRoomForm = new CreateRoomForm();
+    $(document).ready(function() {
+        CreateRoomForm.init("<%= sockrage.addr %>", "<%= sockrage.db.room %>");
+    });
+</script>
+
+</body>
+
+</html>
