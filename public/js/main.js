@@ -1,3 +1,56 @@
+
+$(document).ready(function() {
+
+    var user = JSON.parse(localStorage.getItem("user"));
+    user = user[0];
+
+    if(user.length > 0) {
+        $("#username_menu").html(user.username);
+    }
+
+});
+
+/**
+ * Rooms list
+ * @constructor
+ */
+function RoomTable() {
+
+    this.SockrageRoom;
+
+    this.init = function(sockrageAddr, reference) {
+
+        this.SockrageRoom = new SockRage(sockrageAddr, reference);
+
+        this.SockrageRoom.on("getAll", function(rooms) {
+
+            console.log(rooms);
+
+            var html = "<table class='table table-striped'>";
+                html += "<thead>";
+                    html += "<td>Room's name</td><td>Room's description</td><td>Room's owner</td><td>Settings</td>";
+                html += "</thead>";
+
+                html += "<tbody>";
+
+                    for(var i = 0; i < rooms.length; i++) {
+
+                        var room = rooms[i];
+
+                        html += "<tr><td>" + room.name + "</td><td>" + room.description + "</td><td>" + room.author + "</td><td><a href='/room/" + room._id + "'>Enter</a></td></tr>";
+                    }
+
+                html += "</tbody>";
+            html += "</table>";
+
+            $("#rooms_table").html(html);
+        });
+
+        this.SockrageRoom.list();
+
+    }
+}
+
 /**
  * The create room form
  * @constructor
@@ -9,7 +62,8 @@ function CreateRoomForm() {
 
     this.init = function(sockrageAddr, reference) {
 
-        this.user = JSON.parse(localStorage.getItem("user"));
+        var userSession = JSON.parse(localStorage.getItem("user"));
+        this.user = userSession[0];
 
         this.SockrageRoom = new SockRage(sockrageAddr, reference);
 
