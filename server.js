@@ -97,6 +97,33 @@ app.route('/myRooms').get(function(req, res) {
 });
 
 /**
+ * Settings
+ */
+app.route('/settings').get(function(req, res) {
+    res.render('settings', {
+        page : 'settings',
+        sockrage : {
+            addr : config.configObject.sockrage_addr,
+            db : config.configObject.db
+        }
+    });
+});
+
+/**
+ * Room page
+ */
+app.route('/room/:room_id').get(function(req, res) {
+    res.render('room', {
+        page : 'room',
+        room_id : req.params.room_id,
+        sockrage : {
+            addr : config.configObject.sockrage_addr,
+            db : config.configObject.db
+        }
+    });
+});
+
+/**
  * Upload route
  */
 app.route('/upload').post(function(req, res) {
