@@ -13,7 +13,7 @@ var jsonsql = {
             limit: (returnfields[7] == undefined)? []:returnfields[7].replace(' ','').split(',')
         };
 
-        //console.log(ops);
+        console.log(ops);
 
         return this.parse(json, ops);
     },

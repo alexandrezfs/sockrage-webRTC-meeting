@@ -71,11 +71,24 @@ app.route('/dashboard').get(function(req, res) {
 });
 
 /**
- * Dashboard
+ * New room
  */
 app.route('/newRoom').get(function(req, res) {
     res.render('newRoom', {
         page : 'newRoom',
+        sockrage : {
+            addr : config.configObject.sockrage_addr,
+            db : config.configObject.db
+        }
+    });
+});
+
+/**
+ * My room
+ */
+app.route('/myRooms').get(function(req, res) {
+    res.render('myRooms', {
+        page : 'myRooms',
         sockrage : {
             addr : config.configObject.sockrage_addr,
             db : config.configObject.db
