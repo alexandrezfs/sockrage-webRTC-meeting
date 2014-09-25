@@ -330,11 +330,18 @@ function CreateRoomForm() {
         this.SockrageRoom = new SockRage(sockrageAddr, reference);
 
         $("#submitCreateRoom").click(function() {
-
            CreateRoomForm.createRoom();
-
         });
-
+        $("#inputName").keypress(function(e) {
+            if(e.which == 13) {
+                CreateRoomForm.createRoom();
+            }
+        });
+        $("#inputDescription").keypress(function(e) {
+            if(e.which == 13) {
+                CreateRoomForm.createRoom();
+            }
+        });
     }
 
     this.createRoom = function() {
@@ -387,7 +394,6 @@ function LoginForm() {
                 //connection OK
 
                 localStorage.setItem("user", JSON.stringify(user[0])); //store in session
-
                 document.location = "/dashboard";
             }
             else {
@@ -397,9 +403,19 @@ function LoginForm() {
         });
 
         $("#submitLoginButton").click(function() {
-
             LoginForm.login();
+        });
 
+        $("#inputEmail").keypress(function(e) {
+            if(e.which == 13) {
+                LoginForm.login();
+            }
+        });
+
+        $("#inputPassword").keypress(function(e) {
+            if(e.which == 13) {
+                LoginForm.login();
+            }
         });
 
     }
@@ -463,11 +479,27 @@ function SignupForm() {
             this.dropzoneId
         );
 
+        $("#resetDropzone").click(function() {
+            SignupForm.resetDropzone();
+        });
+
         $("#submitUserButton").click(function() {
             SignupForm.submitForm();
         });
-        $("#resetDropzone").click(function() {
-            SignupForm.resetDropzone();
+        $("#inputEmail").keypress(function(e) {
+            if(e.which == 13) {
+                SignupForm.submitForm();
+            }
+        });
+        $("#inputPassword").keypress(function(e) {
+            if(e.which == 13) {
+                SignupForm.submitForm();
+            }
+        });
+        $("#inputUsername").keypress(function(e) {
+            if(e.which == 13) {
+                SignupForm.submitForm();
+            }
         });
 
     }
@@ -604,6 +636,11 @@ function convertImgToBase64(url, callback, outputFormat){
     img.src = url;
 }
 
+/**
+ * Validate an email with regex
+ * @param email
+ * @returns {boolean}
+ */
 function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
