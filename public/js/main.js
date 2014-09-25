@@ -1,17 +1,31 @@
+/**
+ * App global variable
+ * @type {{userSession: null}}
+ */
 var appGlobal = {
   userSession : null
 };
 
+/**
+ * App starter
+ */
 $(document).ready(function() {
 
     updateUserSession();
 
-    $("#logoutBtn").click(function() {
+    if($("#logoutBtn").length > 0) {
 
-        localStorage.clear();
-        document.location = "/";
-    });
+        //we are in dashboard so let's do security filtering
+        if(appGlobal.userSession == null) {
+            document.location = "/login";
+        }
 
+        //logout button event
+        $("#logoutBtn").click(function() {
+            localStorage.clear();
+            document.location = "/";
+        });
+    }
 });
 
 /**
@@ -95,15 +109,12 @@ function SettingsProfileForm() {
 
         if(response.file) {
 
-            convertImgToBase64(SettingsProfileForm.uploadPath + "/" + response.file.name, function(base64Img) {
+            $("#uploadLoader").hide();
 
-                $("#uploadLoader").hide();
+            $("#" + SettingsProfileForm.dropzoneId).html('<img src="' + encodeURI(SettingsProfileForm.uploadPath + "/" + response.file.name) + '">');
+            $(".dropper").css("border", "1px solid dodgerblue");
+            $("#inputProfilePicture").val(SettingsProfileForm.uploadPath + "/" + response.file.name);
 
-                $("#" + SettingsProfileForm.dropzoneId).html('<img src="' + encodeURI(SettingsProfileForm.uploadPath + "/" + response.file.name) + '">');
-                $(".dropper").css("border", "1px solid #ffffff");
-                $("#inputProfilePicture").val(base64Img);
-
-            });
         }
 
     }
@@ -196,7 +207,12 @@ function Room() {
 
         this.SockrageRoom.on("getById", function(room) {
 
-            $("#room_name").html(room.name);
+            if(room.name == null) {
+                document.location = "/";
+            }
+            else {
+                $("#room_name").html(room.name);
+            }
 
         });
 
@@ -391,7 +407,12 @@ function LoginForm() {
 
     this.login = function() {
 
-        this.SockrageUser.list();
+        var password = $("#inputPassword").val();
+        var email = $("#inputEmail").val();
+
+        if(email.length > 0 && password.length > 0) {
+            this.SockrageUser.list();
+        }
 
     }
 }
@@ -411,6 +432,24 @@ function SignupForm() {
         this.SockrageUser = new SockRage(sockrageAddr, reference);
         this.SockrageUser.on("create", function(data) {
             document.location = "/login";
+        });
+        this.SockrageUser.on("getAll", function(users) {
+
+            users = jsonsql.query(
+                "SELECT * FROM json WHERE (email == '" + $("#inputEmail").val() + "' || username == '" + $("#inputUsername").val() + "')",
+                users);
+
+            if(users.length == 0) {
+                SignupForm.SockrageUser.set({
+                    username : $("#inputUsername").val(),
+                    email : $("#inputEmail").val(),
+                    password : $("#inputPassword").val(),
+                    profilePicture : $("#inputProfilePicture").val()
+                });
+            }
+            else {
+                toastr.error("Email or Username already exists");
+            }
         });
 
         initDropzone(
@@ -445,14 +484,11 @@ function SignupForm() {
 
         if(response.file) {
 
-            convertImgToBase64(SignupForm.uploadPath + "/" + response.file.name, function(base64Img) {
+            $("#uploadLoader").hide();
 
-                $("#uploadLoader").hide();
+            $("#" + SignupForm.dropzoneId).html('<img src="' + encodeURI(SignupForm.uploadPath + "/" + response.file.name) + '">');
+            $("#inputProfilePicture").val(SignupForm.uploadPath + "/" + response.file.name);
 
-                $("#" + SignupForm.dropzoneId).html('<img src="' + encodeURI(SignupForm.uploadPath + "/" + response.file.name) + '">');
-                $("#inputProfilePicture").val(base64Img);
-
-            });
         }
 
     }
@@ -486,16 +522,15 @@ function SignupForm() {
         else if($("#inputEmail").val().length == 0) {
             toastr.error("Please enter your password");
         }
+        else if(!validateEmail($("#inputEmail").val())) {
+            toastr.error("Email is not valid");
+        }
         else if($("#inputProfilePicture").val().length == 0) {
             toastr.error("Please upload a profile picture");
         }
         else {
-            SignupForm.SockrageUser.set({
-                username : $("#inputUsername").val(),
-                email : $("#inputEmail").val(),
-                password : $("#inputPassword").val(),
-                profilePicture : $("#inputProfilePicture").val()
-            });
+            //checking if username+email does not exist
+            SignupForm.SockrageUser.list();
         }
     }
 }
@@ -568,4 +603,9 @@ function convertImgToBase64(url, callback, outputFormat){
         canvas = null;
     };
     img.src = url;
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
