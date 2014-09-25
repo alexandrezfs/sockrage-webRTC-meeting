@@ -48,21 +48,14 @@ function SettingsProfileForm() {
 
     this.init = function(sockrageAddr, reference) {
 
-        console.log(appGlobal);
-
         $("#inputUsername").val(appGlobal.userSession.username);
         $("#inputEmail").val(appGlobal.userSession.email);
         $("#inputProfilePicture").val(appGlobal.userSession.profilePicture);
 
         $("#" + SettingsProfileForm.dropzoneId).html('<img src="' + appGlobal.userSession.profilePicture + '">');
 
-        console.log("init");
-
         this.SockrageUser = new SockRage(sockrageAddr, reference);
         this.SockrageUser.on("update", function(data) {
-
-            console.log(data);
-
             toastr.success("Profile updated !");
         });
 
@@ -85,11 +78,20 @@ function SettingsProfileForm() {
         $("#updateProfileButton").click(function() {
             SettingsProfileForm.updateProfile();
         });
+
+        $("#resetDropzone").click(function() {
+            SettingsProfileForm.resetDropzone();
+        });
+    }
+
+    this.resetDropzone = function() {
+
+        $("#inputProfilePicture").val("");
+        $("#" + SettingsProfileForm.dropzoneId).html("");
+
     }
 
     this.uploadFinished = function(file, response) {
-
-        console.log(response);
 
         if(response.file) {
 
@@ -122,10 +124,7 @@ function SettingsProfileForm() {
         $(".dropper").css("border", "5px dotted dodgerblue");
     }
 
-    this.totalUploadProgress = function(progress, totalBytes, totalBytesSent) {
-
-        console.log(progress);
-    }
+    this.totalUploadProgress = function(progress, totalBytes, totalBytesSent) {}
 
     this.updateProfile = function() {
 
@@ -173,8 +172,6 @@ function SettingsProfileForm() {
 
             SettingsProfileForm.SockrageUser.update(appGlobal.userSession._id, newUser);
 
-            console.log(appGlobal.userSession._id);
-
             newUser._id = appGlobal.userSession._id;
             localStorage.setItem("user", JSON.stringify(newUser));
 
@@ -195,13 +192,9 @@ function Room() {
 
     this.init = function(sockrageAddr, referenceRoom) {
 
-        console.log(referenceRoom);
-
         this.SockrageRoom = new SockRage(sockrageAddr, referenceRoom);
 
         this.SockrageRoom.on("getById", function(room) {
-
-            console.log(room);
 
             $("#room_name").html(room.name);
 
@@ -267,8 +260,6 @@ function RoomTable() {
     }
 
     this.listRooms = function(rooms, filter) {
-
-        console.log(rooms);
 
         var html = "<table class='table table-striped'>";
         html += "<thead>";
@@ -419,11 +410,7 @@ function SignupForm() {
 
         this.SockrageUser = new SockRage(sockrageAddr, reference);
         this.SockrageUser.on("create", function(data) {
-
-            console.log(data);
-
             document.location = "/login";
-
         });
 
         initDropzone(
@@ -441,12 +428,20 @@ function SignupForm() {
         $("#submitUserButton").click(function() {
             SignupForm.submitForm();
         });
+        $("#resetDropzone").click(function() {
+            SignupForm.resetDropzone();
+        });
+
+    }
+
+    this.resetDropzone = function() {
+
+        $("#inputProfilePicture").val("");
+        $("#" + SignupForm.dropzoneId).html("");
 
     }
 
     this.uploadFinished = function(file, response) {
-
-        console.log(response);
 
         if(response.file) {
 
@@ -455,7 +450,6 @@ function SignupForm() {
                 $("#uploadLoader").hide();
 
                 $("#" + SignupForm.dropzoneId).html('<img src="' + encodeURI(SignupForm.uploadPath + "/" + response.file.name) + '">');
-                $(".dropper").css("border", "1px solid #ffffff");
                 $("#inputProfilePicture").val(base64Img);
 
             });
@@ -479,9 +473,7 @@ function SignupForm() {
         $(".dropper").css("border", "5px dotted #ffffff");
     }
 
-    this.totalUploadProgress = function(progress, totalBytes, totalBytesSent) {
-        console.log(progress);
-    }
+    this.totalUploadProgress = function(progress, totalBytes, totalBytesSent) {}
 
     this.submitForm = function() {
 
