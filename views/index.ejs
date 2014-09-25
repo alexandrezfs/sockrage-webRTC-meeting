@@ -2,38 +2,53 @@
 
 <html lang="en">
 
-    <head>
-        <% include partial_external/_htmlHead.ejs %>
-    </head>
+<head>
+    <% include partial_external/_htmlHead.ejs %>
+</head>
 
-    <body>
+<body>
 
-    <div class="site-wrapper">
+<div class="site-wrapper">
 
-        <div class="site-wrapper-inner">
+    <div class="site-wrapper-inner">
 
-            <div class="cover-container">
+        <div class="cover-container">
 
-                <% include partial_external/_header.ejs %>
+            <% include partial_external/_header.ejs %>
 
-                <div class="inner cover">
-                    <h1 class="cover-heading"><i class="fa fa-comments"></i> Meeting.</h1>
-                    <p class="lead">You wanted Skype working on your browser... It's here.</p>
-                    <p class="lead">
-                        <a href="/signup" class="btn btn-lg btn-default">Sign up now</a>
-                    </p>
+            <div class="inner cover">
+                <h1 class="cover-heading"><i class="fa fa-comments"></i> Meeting.</h1>
+                <p class="lead">You wanted Skype working on your browser... It's here.</p>
+                <p class="lead">
+                    <a href="/signup" class="btn btn-lg btn-default">Sign up now</a>
+                </p>
+
+                <div class="row margin-top-3">
+                    <div class="col-lg-12">
+                        <h3>Fully compatible with</h3>
+                        <div class="col-lg-4">
+                            <img src="/img/chrome.png">
+                        </div>
+                        <div class="col-lg-4">
+                            <img src="/img/firefox.png">
+                        </div>
+                        <div class="col-lg-4">
+                            <img src="/img/opera.png">
+                        </div>
+                    </div>
                 </div>
-
-                <% include partial_external/_footer.ejs %>
-
             </div>
+
+            <% include partial_external/_footer.ejs %>
 
         </div>
 
     </div>
 
-    <% include partial_external/_beforeBodyEnd.ejs %>
+</div>
 
-    </body>
+<% include partial_external/_beforeBodyEnd.ejs %>
+
+</body>
 
 </html>
