@@ -19,16 +19,19 @@ $(document).ready(function() {
  */
 function updateUserSession() {
 
-    if(localStorage.getItem("user") !== null) {
+    if(localStorage.getItem("user") != null) {
 
-        var user = JSON.parse(localStorage.getItem("user"));
+        try {
+            var user = JSON.parse(localStorage.getItem("user"));
 
-        if(user && $("#username_menu").length > 0) {
-            user = user;
-            appGlobal.userSession = user;
+            if(user && $("#username_menu").length > 0) {
+                user = user;
+                appGlobal.userSession = user;
 
-            $("#username_menu").html(user.username);
+                $("#username_menu").html(user.username);
+            }
         }
+        catch(e) { }
 
     }
 }
@@ -238,7 +241,28 @@ function RoomTable() {
             RoomTable.listRooms(rooms, filter);
         });
 
+        this.SockrageRoom.on("delete", function(data) {
+
+            toastr.success("Room deleted !");
+
+        });
+
         this.SockrageRoom.list();
+
+    }
+
+    this.removeRoom = function(room_id) {
+
+        smoke.confirm("Are you sure ?", function(e) {
+            if (e){
+                RoomTable.SockrageRoom.delete(room_id);
+                $("#" + room_id).hide();
+            }else{}
+        }, {
+            ok: "Yep",
+            cancel: "Nope",
+            reverseButtons: true
+        });
 
     }
 
@@ -254,16 +278,26 @@ function RoomTable() {
         html += "<tbody>";
 
         if(filter == "my") {
-            var rooms = jsonsql.query(
-                "SELECT * FROM json WHERE (author == '" + appGlobal.userSession.username + "')",
-                rooms);
+            rooms = jsonsql.query(
+            "SELECT * FROM json WHERE (author == '" + appGlobal.userSession.username + "')",
+            rooms);
         }
 
         for(var i = 0; i < rooms.length; i++) {
 
             var room = rooms[i];
 
-            html += "<tr><td>" + room.name + "</td><td>" + room.description + "</td><td>" + room.author + "</td><td><a href='/room/" + room._id + "'>Enter</a></td></tr>";
+            html += "<tr id='" + room._id + "'>"
+                html += "<td>" + room.name + "</td>";
+                html += "<td>" + room.description + "</td>";
+                html += "<td>" + room.author + "</td>";
+                html += "<td>";
+                    html += "<a href='/room/" + room._id + "'><i class='fa fa-arrow-right'></i></a> ";
+                    if(room.author == appGlobal.userSession.username) {
+                        html += "<a href='#' onclick='RoomTable.removeRoom(\""+room._id+"\");'><i class='fa fa-trash'></i></a>";
+                    }
+            html += "</td>"
+            html += "</tr>";
         }
 
         html += "</tbody>";
