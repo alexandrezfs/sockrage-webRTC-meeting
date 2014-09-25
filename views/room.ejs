@@ -9,6 +9,23 @@
 
 <input type="hidden" id="room_id" value="<%= room_id %>">
 
+<div id="webchat-container" class="row">
+
+    <h3><i class="fa fa-comments-o"></i> Chat</h3>
+
+    <div id="webchat-messages"></div>
+
+    <div id="webchat-input">
+
+        <div>
+            <input type="text" placeholder="Type a message..." id="message-input-msg" />
+            <a href="#" id="message-input-confirm"></a>
+        </div>
+
+    </div>
+
+</div>
+
 <div id="wrapper">
 
     <% include partial_dashboard/_header.ejs %>
@@ -55,6 +72,7 @@
     var Room = new Room();
     $(document).ready(function() {
         Room.init("<%= sockrage.addr %>", "<%= sockrage.db.room %>");
+        initSockrageWebchat("<%= sockrage.addr %>", "<%= sockrage.db.chat %>");
     });
 </script>
 

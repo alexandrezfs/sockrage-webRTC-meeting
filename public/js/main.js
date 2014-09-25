@@ -45,7 +45,7 @@ function updateUserSession() {
                 $("#username_menu").html(user.username);
             }
         }
-        catch(e) { }
+        catch(e) {}
 
     }
 }
@@ -188,7 +188,6 @@ function SettingsProfileForm() {
 
             updateUserSession();
         }
-
     }
 }
 
