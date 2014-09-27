@@ -173,6 +173,9 @@ function SettingsProfileForm() {
         else if($("#inputPassword").val() != $("#inputPasswordConfirmation").val() != 0) {
             toastr.error("Passwords don't match !");
         }
+        else if($("#inputCurrentPassword").val() != appGlobal.userSession.password) {
+            toastr.error("Your current password is incorrect");
+        }
         else {
             var newUser = {
                 password : $("#inputPassword").val(),
